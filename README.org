@@ -1,0 +1,26 @@
+* Little GUI Helper
+  Helper functions and macros to ease creating GUIs with Swing and SWT 
+  in Clojure. At the moment main focus is on SWT.
+
+** Goals
+   1. Provide wrapper macros to create GUIs *declarative* way.
+      Analogic to HTML/CSS/JS:
+      1. Object grouping by group name (like classes in HTML).
+      2. Identifing objects by unique ids (like in HTML).
+      3. Cascade styling.
+      4. Wrapping event listeners with Clojure functions.
+   2. Implementation should be as much as possible independent of SWT
+      and Swing details. No reference to this libraries is top goal.
+   3. Do as much as possible at compile time (macros). This is needed for
+      faster application startup.
+   4. At the same time, allow to change the GUI at runtime.
+
+   In fact, provided macros should provide this features:
+   1. Abstract way of defining object tree (e.g. window containting
+      panels containing buttons).
+   2. Abstract way of defining object properties by using cascade styles
+      (group of properties).
+   3. Accessing groups of objects and objects with unique ids at runtime.
+
+** Licence
+   MIT. Included in file COPYING.
