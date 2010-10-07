@@ -22,11 +22,20 @@
 
   Sample Usage:
   (doprops button text \"Shiny button\") or
-  (doprops button {text \"Shiny button\"})"
+  (doprops button {text \"Shiny button\"})
+
+  If a setter method gets multiple parameters, as in
+  JButton/setSize(width, height), put a list or vector with '&' as first
+  element, for example:
+  (doprops button size (& 300 200))"
   
   ([obj m]
      (concat `(doto ~obj)
-	     (->> m (map (fn [[key value]] (list (setter-name key) value))))))
+	     (->> m (map (fn [[key value]]
+			   (if (and (sequential? value)
+				    (= '& (first value)))
+			     `(~(setter-name key) ~@(rest value))
+			     (list (setter-name key) value)))))))
   
   ([obj k v & kvs]
      {:pre [(-> kvs count even?)]}
