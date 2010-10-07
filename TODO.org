@@ -2,3 +2,7 @@
 ** DONE setter-name: translate keywords
    Translate keywords from :camel-case-property -> .setCamelCaseProperty
    (any Named object is treated that way)
+** TODO doprops: consider renaming
+   setprops, set-properties
+** TODO doprops: consider replacing (& ...) construct with some annotation (metadata)
+   ^:multi ?
