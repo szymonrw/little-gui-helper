@@ -2,6 +2,7 @@
   "Properties tools.
 
   Functions and macros to set object properties on compile time."
+  
   (:require (clojure.contrib [string :as string])))
 
 (defn setter-name
@@ -17,15 +18,18 @@
 
 (defmacro doprops
   "Generate code that set property k (symbol) with value v on object.
+  Two variants: with map m and with variable number of key and value pairs.
 
   Sample Usage:
-  (doprops button Text \"Shiny button\")"
+  (doprops button text \"Shiny button\") or
+  (doprops button {text \"Shiny button\"})"
   
-  [obj k v & kvs]
-  {:pre [(-> kvs count even?)]}
+  ([obj m]
+     (concat `(doto ~obj)
+	     (->> m (map (fn [[key value]] (list (setter-name key) value))))))
   
-  (concat `(doto ~obj)
-	  (->> (partition 2 (concat [k v] kvs))
-	       (map (fn [[key value]] (list (setter-name key) value))))))
-
+  ([obj k v & kvs]
+     {:pre [(-> kvs count even?)]}
+     `(doprops ~obj ~(partition 2 (concat [k v] kvs)))))
+  
   
