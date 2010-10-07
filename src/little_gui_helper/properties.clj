@@ -1,7 +1,14 @@
-(ns little-gui-helper.properties)
+(ns little-gui-helper.properties
+  "Properties tools.
+
+  Functions and macros to set object properties on compile time.")
 
 (defn setter-name
-  "Generate setter name from symbol or keyword"
+  "Generate setter name property key.
+  Symbols are treated verbatim, they are just prefixed with '.set' and first
+  is ensured to be upper case.
+
+  TODO: Translate keywords from :camel-case-property -> .setCamelCaseProperty"
   [key]
   (->> key name (str ".set") symbol))
 
