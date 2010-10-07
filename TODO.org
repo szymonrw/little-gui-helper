@@ -1,0 +1,3 @@
+* little-gui-helper/properties.clj
+** TODO setter-name: translate keywords
+   Translate keywords from :camel-case-property -> .setCamelCaseProperty

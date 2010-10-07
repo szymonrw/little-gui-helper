@@ -6,17 +6,16 @@
 (defn setter-name
   "Generate setter name property key.
   Symbols are treated verbatim, they are just prefixed with '.set' and first
-  is ensured to be upper case.
+  is ensured to be upper case."
 
-  TODO: Translate keywords from :camel-case-property -> .setCamelCaseProperty"
   [key]
   (->> key name (str ".set") symbol))
 
 (defmacro doprops
-  "Generate code that set property k (symbol) on object.
-  
-  sample usage:
-  (doprops button Text \"Shiny button\" Width 100)"
+  "Generate code that set property k (symbol) with value v on object.
+
+  Sample Usage:
+  (doprops button Text \"Shiny button\")"
   
   [obj k v & kvs]
   {:pre [(-> kvs count even?)]}
