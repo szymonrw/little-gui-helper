@@ -1,3 +1,4 @@
 * little-gui-helper/properties.clj
-** TODO setter-name: translate keywords
+** DONE setter-name: translate keywords
    Translate keywords from :camel-case-property -> .setCamelCaseProperty
+   (any Named object is treated that way)

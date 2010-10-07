@@ -1,15 +1,19 @@
 (ns little-gui-helper.properties
   "Properties tools.
 
-  Functions and macros to set object properties on compile time.")
+  Functions and macros to set object properties on compile time."
+  (:require (clojure.contrib [string :as string])))
 
 (defn setter-name
-  "Generate setter name property key.
-  Symbols are treated verbatim, they are just prefixed with '.set' and first
-  is ensured to be upper case."
+  "Generate setter method name for key. Accepts strings, keywords
+  and symbols.
+
+  Notation :nice-property is translated to NiceProperty (CamelCase)."
 
   [key]
-  (->> key name (str ".set") symbol))
+  (->> key name
+       (string/replace-by #"^\w|\-\w" #(-> %1 last Character/toUpperCase str))
+       (str ".set") symbol))
 
 (defmacro doprops
   "Generate code that set property k (symbol) with value v on object.
