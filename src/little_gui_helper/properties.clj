@@ -1,11 +1,11 @@
 (ns little-gui-helper.properties
   "Properties tools.
 
-  Functions and macros to set object properties on compile time."
+  Macros to generate code that sets object properties at compile time."
   
   (:require (clojure.contrib [string :as string])))
 
-(defn setter-name
+(defn- setter-name
   "Generate setter method name for key. Accepts strings, keywords
   and symbols.
 
