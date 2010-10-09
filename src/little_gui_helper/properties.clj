@@ -14,7 +14,8 @@
   [key]
   (->> key name
        (string/replace-by #"^\w|\-\w" #(-> %1 last Character/toUpperCase str))
-       (str ".set") symbol))
+       (str ".set")
+       symbol))
 
 (defmacro doprops
   "Generate code that set property k (symbol) with value v on object.
@@ -25,20 +26,18 @@
   (doprops button {text \"Shiny button\"})
 
   If a setter method gets multiple parameters, as in
-  JButton/setSize(width, height), put a list or vector with '&' as first
-  element, for example:
-  (doprops button size (& 300 200))"
+  JButton/setSize(width, height), put a list or vector and annotate it with
+  ^unroll, for example:
+  (doprops button size ^unroll (300 200))"
   
   ([obj m]
      (concat `(doto ~obj)
 	     (->> m (map (fn [[key value]]
-			   (if (and (sequential? value)
-				    (= '& (first value)))
-			     `(~(setter-name key) ~@(rest value))
+			   (if (-> value meta :tag (= 'unroll))
+			     `(~(setter-name key) ~@value)
 			     (list (setter-name key) value)))))))
   
   ([obj k v & kvs]
      {:pre [(-> kvs count even?)]}
      `(doprops ~obj ~(partition 2 (concat [k v] kvs)))))
-  
-  
+

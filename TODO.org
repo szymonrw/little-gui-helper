@@ -4,5 +4,5 @@
    (any Named object is treated that way)
 ** TODO doprops: consider renaming
    setprops, set-properties
-** TODO doprops: consider replacing (& ...) construct with some annotation (metadata)
-   ^:multi ?
+** DONE doprops: consider replacing (& ...) construct with some annotation (metadata)
+   ^unroll ?
