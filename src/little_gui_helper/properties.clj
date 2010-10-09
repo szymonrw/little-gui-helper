@@ -39,5 +39,5 @@
   
   ([obj k v & kvs]
      {:pre [(-> kvs count even?)]}
-     `(doprops ~obj ~(partition 2 (concat [k v] kvs)))))
+     `(doprops ~obj ~(apply array-map k v kvs))))
 
