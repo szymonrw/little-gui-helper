@@ -14,8 +14,8 @@
   \"Things\" can be anything that can be a key in map.
   Instead of {} you can use () if you prefer.")
 
-(defn- flat-styles
-  ""
+(defn- pair&correct-css
+  "Pairs and corrects css."
   [css]
   {:pre [;; check if css contains pairs
 	 (-> css count even?)
@@ -24,21 +24,23 @@
 	      (every? #(or (map? %)
 			   (and (sequential? %) (-> % count even?)))))]}
 
-  (let [grouped-css ;; list of [(id1 id2 id3) style]
-	(->> (partition 2 css)
-	     (map (fn [[ids style]]
-		    [(if (sequential? ids)
-		       ids ;; ids is a proper list
-		       (list ids)) ;; ids is not a list, wrap it in a list
-		     (if (map? style)
+  ;; list of [(id1 id2 id3) style]
+  (->> (partition 2 css)
+       (map (fn [[ids style]]
+	      [(if (sequential? ids)
+		 ids ;; ids is a proper list
+		 (list ids)) ;; ids is not a list, wrap it in a list
+	       (if (map? style)
 		 style ;; style is a proper style
-		 (apply array-map style))]))) ;; style is a list, make it a map
+		 (apply array-map style))])))) ;; style is a list, make it a map
 
-	flat-list ;; list of [id style]
-	(for [[ids style] grouped-css
-	      i ids]
-	  [i style])]
-    
-    (reduce (fn [style-map [id style]]
-	      (assoc style-map id (merge (style-map id) style)))
-	    {} flat-list)))
+(defn- flat-styles
+  "Flats styles"
+  [css]
+  (->> (for [[ids style] (pair&correct-css css)
+	     i ids]
+	 [i style]) ;; list of [id style]
+       
+       (reduce (fn [style-map [id style]]
+		 (assoc style-map id (merge (style-map id) style)))
+	       {})))

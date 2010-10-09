@@ -5,4 +5,8 @@
 ** TODO doprops: consider renaming
    setprops, set-properties
 ** DONE doprops: consider replacing (& ...) construct with some annotation (metadata)
-   ^unroll ?
+   ^unroll
+
+* little-gui-helper/styles.clj
+** TODO add more documentation to flat-styles and pair&correct-css
+   
