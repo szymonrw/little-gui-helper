@@ -11,7 +11,7 @@
      {another map}
    ...)
 
-  \"Things\" can be anything that can be a key in map.
+  \"Things\" can be anything that can be a key in a map.
   Instead of {} you can use () if you prefer.")
 
 (defn- pair&correct-css
