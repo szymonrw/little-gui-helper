@@ -16,7 +16,7 @@
   (:require (little-gui-helper [properties :as props])
 	    (clojure.contrib [string :as string])))
 
-(defn- event-spec?
+(defn event-spec?
   "Returns true if name of symbol begins with + and contains /"
   [s]
   (let [n (name s)]
@@ -41,6 +41,6 @@
      (-> method props/camelCase)]))
 
 (defmacro event
-  ""
+  "shoud return (.addXXListener (reify XXListener (method [this event] body)))"
   [[spec body]]
   )
