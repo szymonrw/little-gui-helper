@@ -3,7 +3,8 @@
 
   Macros to generate code that sets object properties at compile time."
   
-  (:require (little-gui-helper [utils :as utils])))
+  (:require (little-gui-helper [utils :as utils]
+			       [events :as events])))
 
 (defn- setter-name
   "Generate setter method name for key. Accepts strings, keywords
@@ -28,14 +29,22 @@
   If a setter method gets multiple parameters, as in
   JButton/setSize(width, height), put a list or vector and annotate it with
   ^unroll, for example:
-  (doprops button size ^unroll (300 200))"
+  (doprops button size ^unroll (300 200))
+
+  Property can also be an event definition. See documentation for
+  little-gui-helper.events/addevent."
   
   ([obj m]
      (concat `(doto ~obj)
 	     (->> m (map (fn [[key value]]
-			   (if (-> value meta :tag (= 'unroll))
-			     `(~(setter-name key) ~@value)
-			     (list (setter-name key) value)))))))
+			   (cond (events/event-spec? key)
+				 `(events/addevent [~key ~value])
+				 
+				 (-> value meta :tag (= 'unroll))
+				 `(~(setter-name key) ~@value)
+
+				 true ;; else
+				 (list (setter-name key) value)))))))
   
   ([obj k v & kvs]
      {:pre [(-> kvs count even?)]}
