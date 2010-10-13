@@ -19,7 +19,7 @@
   [css]
   {:pre [;; check if css contains pairs
 	 (-> css count even?)
-	 ;; check if style is a map or list with even elements:
+	 ;; check if every style is a map or list with even elements:
 	 (->> css rest (take-nth 2) 
 	      (every? #(or (map? %)
 			   (and (sequential? %) (-> % count even?)))))]}

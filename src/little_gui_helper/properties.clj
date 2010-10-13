@@ -5,6 +5,17 @@
   
   (:require (clojure.contrib [string :as string])))
 
+(defn camelCase
+  "Translates a string in a form of \"nice-property\" to niceProperty"
+  [s]
+  (string/replace-by #"\-\w" #(-> %1 last Character/toUpperCase str) s))
+
+(defn CamelCase
+  "Like camelCase but first letter is always uppercase."
+  [s]
+  (let [camel-cased (camelCase s)]
+  (reduce str (-> camel-cased first Character/toUpperCase) (rest camel-cased))))
+  
 (defn- setter-name
   "Generate setter method name for key. Accepts strings, keywords
   and symbols.
@@ -13,7 +24,7 @@
 
   [key]
   (->> key name
-       (string/replace-by #"^\w|\-\w" #(-> %1 last Character/toUpperCase str))
+       CamelCase
        (str ".set")
        symbol))
 
