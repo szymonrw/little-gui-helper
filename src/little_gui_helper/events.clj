@@ -13,7 +13,7 @@
       void mouseUp(MouseEvent event) {
         body;
       }});"
-  (:require (little-gui-helper [properties :as props])
+  (:require (little-gui-helper [utils :as utils])
 	    (clojure.contrib [string :as string])))
 
 (defn event-spec?
@@ -37,8 +37,8 @@
   (let [[listener method] (->> s name rest ;; cut '+' from begining
 			       (reduce str)
 			       (string/split #"\."))]
-    [(-> listener props/CamelCase (str "Listener"))
-     (-> method props/camelCase)]))
+    [(-> listener utils/CamelCase (str "Listener"))
+     (-> method utils/camelCase)]))
 
 (defmacro addevent
   "Add event to obj given by the spec and body.
@@ -86,7 +86,7 @@
 			body)
 
 		 ;; Implement empty methods.
-		 ;; Needed because reify would made them abstract.
+		 ;; Needed because reify would make them abstract.
 		 ~@(for [m (->> listener-class resolve .getMethods
 				(map #(.getName %))
 				(filter #(not= % method))
