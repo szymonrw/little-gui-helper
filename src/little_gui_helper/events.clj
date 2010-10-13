@@ -42,5 +42,10 @@
 
 (defmacro event
   "shoud return (.addXXListener (reify XXListener (method [this event] body)))"
-  [[spec body]]
-  )
+  [obj [spec body]]
+  (let [[listener method] (listener&method-names spec)]
+	`(~(symbol (str ".add" listener))
+	  ~obj
+	  (reify ~(symbol listener)
+		 (~(symbol method) [_ ~(symbol "event")]
+		  ~body)))))
