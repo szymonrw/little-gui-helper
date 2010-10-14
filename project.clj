@@ -3,4 +3,5 @@
   :dependencies [[org.clojure/clojure "1.2.0"]
 		 [org.clojure/clojure-contrib "1.2.0"]]
   :dev-dependencies [[swank-clojure "1.2.0"]
-		     [org.eclipse/swt-gtk-linux-x86 "3.5.2"]])
+		     [org.eclipse/swt-gtk-linux-x86 "3.5.2"]]
+  :aot [#"little-gui-helper\..*"])
