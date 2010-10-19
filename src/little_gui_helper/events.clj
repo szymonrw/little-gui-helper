@@ -1,8 +1,8 @@
 (ns little-gui-helper.events
   "Tools for dealing with defining events
 
-  Events are are special properties with special syntax. For example this
-  property:
+  Events are are special properties with special syntax. For example
+  this property:
 
   +mouse.mouse-up body
 
@@ -43,8 +43,9 @@
 (defmacro addevent
   "Add event to obj given by the spec and body.
 
-  Specification consists of + sign (interpret this as \"addXxxListener\")
-  listener name (without \"Listener\" part), dot and a method name. For example:
+  Specification consists of + sign (interpret this as
+  \"addXxxListener\") listener name (without \"Listener\" part), dot
+  and a method name. For example:
 
   +mouse.mouse-clicked    ===>   MouseListener interface, mouseClicked method
      | 	 |     	     |

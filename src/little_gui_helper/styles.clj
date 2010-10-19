@@ -1,8 +1,8 @@
 (ns little-gui-helper.styles
   "Operations on styles.
 
-  CSS here has different syntax that anywhere else. It's because we want
-  to write everything in Clojure.
+  CSS here has different syntax that anywhere else. It's because we
+  want to write everything in Clojure.
 
   Syntax:
   ((list of things representing group or object ids)

@@ -20,15 +20,16 @@
 
 (defmacro doprops
   "Generate code that set property k (symbol) with value v on object.
-  Two variants: with map m and with variable number of key and value pairs.
+  Two variants: with map m and with variable number of key and value
+  pairs.
 
   Sample Usage:
   (doprops button text \"Shiny button\") or
   (doprops button {text \"Shiny button\"})
 
   If a setter method gets multiple parameters, as in
-  JButton/setSize(width, height), put a list or vector and annotate it with
-  ^unroll, for example:
+  JButton/setSize(width, height), put a list or vector and annotate it
+  with ^unroll, for example:
   (doprops button size ^unroll (300 200))
 
   Property can also be an event definition. See documentation for

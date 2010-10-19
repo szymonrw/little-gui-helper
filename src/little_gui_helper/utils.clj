@@ -1,6 +1,7 @@
 (ns little-gui-helper.utils
   "General utilities for Little GUI Helper.
-  Name \"utils\" usually means that author didn't know where to put this stuff."
+  Name \"utils\" usually means that author didn't know where to put
+  this stuff."
   (:require (clojure.contrib [string :as string])))
 
 (defn camelCase
