@@ -9,6 +9,17 @@
    setprops, set-properties
 ** DONE doprops: consider replacing (& ...) construct with some annotation (metadata)
    ^unroll
+** TODO doprops: consider separating events and properties
+   there have to be a possibility to add more than one listener, for example1:
+   :+mouse.mouseUp body1
+   :+mouse.mouseUp body2
+   should add two listeners.
+
+   Possible solutions:
+   1. Dump the map idea (properties always as lists)
+   2. separate events from properties (properties in a map, events in list)
+   3. separate events from properties only when merging styles (in styles.clj)
+      (bad idea probably).
 
 * little-gui-helper/styles.clj
 ** TODO add more documentation to flat-styles and pair&correct-css
