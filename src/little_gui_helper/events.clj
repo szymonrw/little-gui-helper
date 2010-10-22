@@ -38,7 +38,7 @@
 			       (reduce str)
 			       (string/split #"\."))]
     [(-> listener utils/CamelCase (str "Listener"))
-     (-> method utils/camelCase)]))
+     (-> method utils/camelCase-method)]))
 
 (defmacro addevent
   "Add event to obj given by the spec and body.

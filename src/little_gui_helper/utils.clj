@@ -4,13 +4,15 @@
   this stuff."
   (:require (clojure.contrib [string :as string])))
 
-(defn camelCase
-  "Translates a string in a form of \"nice-property\" to niceProperty"
+(defn camelCase-method
+  "Translates a string in a form of \"nice-property\" to
+  niceProperty (traditionally used in Java for method names."
   [s]
   (string/replace-by #"\-\w" #(-> %1 last Character/toUpperCase str) s))
 
 (defn CamelCase
-  "Like camelCase but first letter is always uppercase."
+  "Like camelCase but first letter is always uppercase (traditional
+  way of naming classes in Java."
   [s]
-  (let [camel-cased (camelCase s)]
+  (let [camel-cased (camelCase-method s)]
   (reduce str (-> camel-cased first Character/toUpperCase) (rest camel-cased))))
